@@ -16,9 +16,11 @@ from pydantic import Field
 # The log_level is necessary for Cline to work: https://github.com/jlowin/fastmcp/issues/81
 mcp = FastMCP("Interactive Feedback MCP", log_level="ERROR")
 
+API_PORT = int(os.environ.get("UI_SERVER_PORT", 50689))
+
 # Define the API endpoint URL
 # You might want to make this configurable (e.g., via environment variable)
-FEEDBACK_API_URL = "http://localhost:8000/run_feedback_ui/"
+FEEDBACK_API_URL = f"http://localhost:{API_PORT}/run_feedback_ui/"
 # Define a long timeout for the API request (e.g., 1 hour = 3600 seconds)
 # Adjust as needed based on how long you expect the UI interaction to take.
 API_TIMEOUT_SECONDS = 3600.0

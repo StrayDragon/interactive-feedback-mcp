@@ -24,6 +24,8 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import uvicorn
 
+API_PORT = int(os.environ.get("UI_SERVER_PORT", 50689))
+
 # --- TypedDicts (can also be Pydantic models for FastAPI response) ---
 class FeedbackResult(TypedDict):
     logs: str 
@@ -641,6 +643,6 @@ if __name__ == "__main__":
 
     print("Starting FastAPI server...")
     # To run the FastAPI server:
-    # uvicorn your_script_name:app --host 0.0.0.0 --port 8000
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    # uvicorn your_script_name:app --host 0.0.0.0 --port API_PORT
+    uvicorn.run(app, host="0.0.0.0", port=API_PORT)
 

@@ -1,8 +1,15 @@
+set dotenv-required
+set dotenv-load
+
 default:
     @just -l
 
-run-ui-server:
-    uv run fastapi dev feedback_ui.py
+init-run-ui-server:
+    #!/bin/bash
+    [ -f .env ] && echo "✅ 已初始化" || ([ -f example.env ] && mv example.env .env && echo "🚀 初始化完毕" || echo "❌ 初始化失败: example.env 不存在")
+
+run-ui-server: init-run-ui-server
+    uv run feedback_ui.py
 
 inspect:
     npx @modelcontextprotocol/inspector uv run server.py 
